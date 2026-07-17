@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -24,164 +25,171 @@
   }
   button{touch-action:manipulation;}
 
-  /* ============ 입력 화면 ============ */
-  #inputView{max-width:560px; margin:0 auto; padding:0 18px 60px;}
-  header.appbar{
-    background:var(--teal); color:#fff;
-    margin:0 -18px 24px; padding:26px 22px 22px;
-  }
-  header.appbar .org{font-size:12px; letter-spacing:.14em; opacity:.85; margin-bottom:6px;}
-  header.appbar h1{font-size:21px; font-weight:800;}
-  header.appbar p{font-size:13px; opacity:.9; margin-top:8px;}
+/* ============ 입력 화면 ============ */
+#inputView{max-width:560px; margin:0 auto; padding:0 18px 60px;}
+header.appbar{
+background:var(–teal); color:#fff;
+margin:0 -18px 24px; padding:26px 22px 22px;
+}
+header.appbar .org{font-size:12px; letter-spacing:.14em; opacity:.85; margin-bottom:6px;}
+header.appbar h1{font-size:21px; font-weight:800;}
+header.appbar p{font-size:13px; opacity:.9; margin-top:8px;}
 
-  fieldset{border:0; margin-bottom:28px;}
-  legend{
-    font-size:15px; font-weight:800; color:var(--teal-dark);
-    padding-bottom:8px; margin-bottom:14px;
-    border-bottom:2px solid var(--teal); width:100%;
-  }
-  .field{margin-bottom:16px;}
-  .field label.t{display:block; font-size:13.5px; font-weight:700; margin-bottom:6px;}
-  .req::after{content:" *"; color:#c0392b;}
-  input[type=text],input[type=tel],input[type=email],input[type=date]{
-    width:100%; padding:12px 13px; font-size:16px;
-    border:1px solid var(--line); border-radius:8px; background:#fff;
-    -webkit-appearance:none; appearance:none;
-  }
-  input:focus{outline:2px solid var(--teal); outline-offset:1px; border-color:var(--teal);}
-  .hint{font-size:12px; color:#5f7278; margin-top:5px;}
-  .hint.warn{color:var(--warn);}
+fieldset{border:0; margin-bottom:28px;}
+legend{
+font-size:15px; font-weight:800; color:var(–teal-dark);
+padding-bottom:8px; margin-bottom:14px;
+border-bottom:2px solid var(–teal); width:100%;
+}
+.field{margin-bottom:16px;}
+.field label.t{display:block; font-size:13.5px; font-weight:700; margin-bottom:6px;}
+.req::after{content:” *”; color:#c0392b;}
+input[type=text],input[type=tel],input[type=email],input[type=date]{
+width:100%; padding:12px 13px; font-size:16px;
+border:1px solid var(–line); border-radius:8px; background:#fff;
+-webkit-appearance:none; appearance:none;
+}
+input:focus{outline:2px solid var(–teal); outline-offset:1px; border-color:var(–teal);}
+.hint{font-size:12px; color:#5f7278; margin-top:5px;}
+.hint.warn{color:var(–warn);}
 
-  .choices{display:flex; flex-wrap:wrap; gap:8px;}
-  .choices label{
-    display:flex; align-items:center; gap:7px;
-    border:1px solid var(--line); border-radius:8px;
-    padding:11px 14px; font-size:14.5px; background:#fff; cursor:pointer;
-    flex:1 1 auto; justify-content:center; min-width:100px;
-  }
-  .choices input{accent-color:var(--teal); width:17px; height:17px;}
-  .choices label:has(input:checked){
-    background:var(--teal-pale); border-color:var(--teal); font-weight:700;
-  }
+.choices{display:flex; flex-wrap:wrap; gap:8px;}
+.choices label{
+display:flex; align-items:center; gap:7px;
+border:1px solid var(–line); border-radius:8px;
+padding:11px 14px; font-size:14.5px; background:#fff; cursor:pointer;
+flex:1 1 auto; justify-content:center; min-width:100px;
+}
+.choices input{accent-color:var(–teal); width:17px; height:17px;}
+.choices label:has(input:checked){
+background:var(–teal-pale); border-color:var(–teal); font-weight:700;
+}
 
-  .subfield{display:none; margin-top:10px;}
-  .subfield.show{display:block;}
+.subfield{display:none; margin-top:10px;}
+.subfield.show{display:block;}
 
-  .notice-box{
-    background:#fff; border:1px solid var(--line); border-radius:10px;
-    padding:14px 15px; font-size:13px; margin-bottom:14px; color:#33474e;
-  }
-  .notice-box b{color:var(--teal-dark);}
-  .consent-text{
-    background:#f2f6f7; border-radius:8px; padding:12px 13px;
-    font-size:12.5px; color:#41545a; margin-bottom:10px;
-  }
-  .consent-text table{width:100%; border-collapse:collapse; margin:8px 0; font-size:11.5px;}
-  .consent-text th,.consent-text td{border:1px solid #b9c8cd; padding:5px 6px; text-align:center;}
-  .consent-text th{background:#e3ecee;}
+.notice-box{
+background:#fff; border:1px solid var(–line); border-radius:10px;
+padding:14px 15px; font-size:13px; margin-bottom:14px; color:#33474e;
+}
+.notice-box b{color:var(–teal-dark);}
+.consent-text{
+background:#f2f6f7; border-radius:8px; padding:12px 13px;
+font-size:12.5px; color:#41545a; margin-bottom:10px;
+}
+.consent-text table{width:100%; border-collapse:collapse; margin:8px 0; font-size:11.5px;}
+.consent-text th,.consent-text td{border:1px solid #b9c8cd; padding:5px 6px; text-align:center;}
+.consent-text th{background:#e3ecee;}
 
-  /* 서명 */
-  .sig-wrap{
-    border:2px dashed var(--teal); border-radius:12px;
-    background:#fff; position:relative; overflow:hidden;
-  }
-  #sigCanvas{display:block; width:100%; height:190px; touch-action:none; cursor:crosshair;}
-  .sig-placeholder{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    color:#9db3b9; font-size:14px; pointer-events:none;
-  }
-  .sig-tools{display:flex; justify-content:flex-end; margin-top:8px;}
-  .btn-ghost{
-    background:#fff; border:1px solid var(--line); border-radius:8px;
-    padding:8px 14px; font-size:13.5px; color:var(--ink); cursor:pointer;
-  }
+/* 서명 */
+.sig-wrap{
+border:2px dashed var(–teal); border-radius:12px;
+background:#fff; position:relative; overflow:hidden;
+}
+#sigCanvas{display:block; width:100%; height:190px; touch-action:none; cursor:crosshair;}
+.sig-placeholder{
+position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+color:#9db3b9; font-size:14px; pointer-events:none;
+}
+.sig-tools{display:flex; justify-content:flex-end; margin-top:8px;}
+.btn-ghost{
+background:#fff; border:1px solid var(–line); border-radius:8px;
+padding:8px 14px; font-size:13.5px; color:var(–ink); cursor:pointer;
+}
 
-  .btn-primary{
-    display:block; width:100%; margin-top:8px;
-    background:var(--teal); color:#fff; border:0; border-radius:12px;
-    padding:16px; font-size:17px; font-weight:800; cursor:pointer;
-  }
-  .btn-primary:active{background:var(--teal-dark);}
-  #errMsg{color:#c0392b; font-size:13.5px; font-weight:700; margin-top:10px; display:none; text-align:center;}
+.btn-primary{
+display:block; width:100%; margin-top:8px;
+background:var(–teal); color:#fff; border:0; border-radius:12px;
+padding:16px; font-size:17px; font-weight:800; cursor:pointer;
+}
+.btn-primary:active{background:var(–teal-dark);}
+#errMsg{color:#c0392b; font-size:13.5px; font-weight:700; margin-top:10px; display:none; text-align:center;}
 
-  /* ============ 인쇄 서식 화면 ============ */
-  #printView{display:none; max-width:760px; margin:0 auto; padding:20px 14px 60px;}
-  .printbar{
-    display:flex; gap:10px; margin-bottom:18px;
-  }
-  .printbar button{flex:1; padding:14px; font-size:15px; font-weight:800; border-radius:10px; border:0; cursor:pointer;}
-  .printbar .go-print{background:var(--teal); color:#fff;}
-  .printbar .go-back{background:#fff; border:1px solid var(--line); color:var(--ink);}
-  .printbar-hint{font-size:12.5px; color:#5f7278; margin-bottom:16px; text-align:center;}
+/* ============ 인쇄 서식 화면 ============ */
+#printView{display:none; max-width:760px; margin:0 auto; padding:20px 14px 60px;}
+.printbar{
+display:flex; gap:10px; margin-bottom:18px;
+}
+.printbar button{flex:1; padding:14px; font-size:15px; font-weight:800; border-radius:10px; border:0; cursor:pointer;}
+.printbar .go-print{background:var(–teal); color:#fff;}
+.printbar .go-back{background:#fff; border:1px solid var(–line); color:var(–ink);}
+.printbar-hint{font-size:12.5px; color:#5f7278; margin-bottom:16px; text-align:center;}
 
-  .sheet{
-    background:#fff; border:1px solid #d8dfe2; padding:34px 30px;
-    font-family:'Batang','바탕','Noto Serif KR',serif;
-    font-size:11.5pt; color:#000;
-  }
-  .sheet .doc-title{
-    text-align:center; font-size:17pt; font-weight:800; letter-spacing:.06em;
-    margin-bottom:4px;
-  }
-  .sheet .doc-sub{text-align:center; font-size:10.5pt; margin-bottom:18px;}
-  table.form{width:100%; border-collapse:collapse; margin-bottom:12px;}
-  table.form th, table.form td{
-    border:1px solid #000; padding:7px 9px; font-size:10.5pt; vertical-align:middle;
-  }
-  table.form th{
-    background:#eef2f2; font-weight:700; text-align:center; width:23%;
-    letter-spacing:.05em; white-space:nowrap;
-  }
-  table.form td{text-align:left; word-break:break-all;}
-  .fine{font-size:9pt; margin:6px 0 14px; line-height:1.5;}
-  .sec-title{
-    text-align:center; font-weight:800; font-size:12pt; margin:18px 0 8px;
-  }
-  .consent-block{font-size:9.5pt; line-height:1.6; margin-bottom:6px;}
-  table.mini{width:100%; border-collapse:collapse; margin:6px 0;}
-  table.mini th, table.mini td{border:1px solid #000; padding:5px 6px; font-size:9pt; text-align:center;}
-  table.mini th{background:#eef2f2;}
-  .agree-line{text-align:right; font-size:10.5pt; margin:6px 0 14px; font-weight:700;}
-  .sign-area{margin-top:26px; text-align:center; font-size:11pt;}
-  .sign-date{margin-bottom:18px; letter-spacing:.12em;}
-  .sign-row{
-    display:flex; align-items:flex-end; justify-content:center; gap:14px;
-  }
-  .sign-row .who{font-weight:700;}
-  .sign-img-box{
-    width:170px; height:64px; border-bottom:1px solid #999;
-    display:flex; align-items:flex-end; justify-content:center;
-  }
-  .sign-img-box img{max-width:100%; max-height:100%;}
-  .to-line{margin-top:30px; font-size:12pt; font-weight:800; text-align:center; letter-spacing:.08em;}
+.sheet{
+background:#fff; border:1px solid #d8dfe2; padding:34px 30px;
+font-family:‘Batang’,‘바탕’,‘Noto Serif KR’,serif;
+font-size:11.5pt; color:#000;
+}
+.sheet .doc-title{
+text-align:center; font-size:17pt; font-weight:800; letter-spacing:.06em;
+margin-bottom:4px;
+}
+.sheet .doc-sub{text-align:center; font-size:10.5pt; margin-bottom:18px;}
+table.form{width:100%; border-collapse:collapse; margin-bottom:12px;}
+table.form th, table.form td{
+border:1px solid #000; padding:7px 9px; font-size:10.5pt; vertical-align:middle;
+}
+table.form th{
+background:#eef2f2; font-weight:700; text-align:center; width:23%;
+letter-spacing:.05em; white-space:nowrap;
+}
+table.form td{text-align:left; word-break:break-all;}
+.fine{font-size:9pt; margin:6px 0 14px; line-height:1.5;}
+.sec-title{
+text-align:center; font-weight:800; font-size:12pt; margin:18px 0 8px;
+}
+.consent-block{font-size:9.5pt; line-height:1.6; margin-bottom:6px;}
+table.mini{width:100%; border-collapse:collapse; margin:6px 0;}
+table.mini th, table.mini td{border:1px solid #000; padding:5px 6px; font-size:9pt; text-align:center;}
+table.mini th{background:#eef2f2;}
+.agree-line{text-align:right; font-size:10.5pt; margin:6px 0 14px; font-weight:700;}
+.sign-area{margin-top:26px; text-align:center; font-size:11pt;}
+.sign-date{margin-bottom:18px; letter-spacing:.12em;}
+.sign-row{
+display:flex; align-items:center; justify-content:center; gap:12px;
+}
+.sign-row .who{font-weight:700;}
+.seal-spot{position:relative; display:inline-block; padding:14px 6px;}
+.seal-spot img{
+position:absolute; left:50%; top:50%;
+transform:translate(-50%,-52%);
+height:42px; max-width:120px; pointer-events:none;
+}
+.to-line{margin-top:30px; font-size:12pt; font-weight:800; text-align:center; letter-spacing:.08em;}
 
-  /* ----- 모바일(좁은 화면) 최적화 ----- */
-  @media (max-width:520px){
-    .sheet{padding:20px 12px; font-size:10pt;}
-    .sheet .doc-title{font-size:14.5pt;}
-    table.form th{width:26%; font-size:8.5pt; padding:6px 4px; white-space:normal;}
-    table.form td{font-size:9pt; padding:6px 5px;}
-    table.mini th, table.mini td{font-size:7.5pt; padding:4px 3px;}
-    .consent-block{font-size:8.5pt;}
-    .fine{font-size:8pt;}
-    .sign-row{gap:8px; flex-wrap:wrap;}
-    .sig-img-box{width:140px; height:56px;}
-    .to-line{font-size:10.5pt;}
-    input[type=date]{min-height:48px;}
-  }
+/* —– 모바일(좁은 화면) 최적화 —– */
+@media (max-width:520px){
+.sheet{padding:20px 12px; font-size:10pt;}
+.sheet .doc-title{font-size:14.5pt;}
+table.form th{width:26%; font-size:8.5pt; padding:6px 4px; white-space:normal;}
+table.form td{font-size:9pt; padding:6px 5px;}
+table.mini th, table.mini td{font-size:7.5pt; padding:4px 3px;}
+.consent-block{font-size:8.5pt;}
+.fine{font-size:8pt;}
+.sign-row{gap:8px; flex-wrap:wrap;}
+.seal-spot img{height:36px; max-width:100px;}
+.to-line{font-size:10.5pt;}
+input[type=date]{min-height:48px;}
+}
 
-  @media print{
-    body{background:#fff;}
-    #inputView, .printbar, .printbar-hint{display:none !important;}
-    #printView{display:block !important; padding:0; max-width:none;}
-    .sheet{border:0; padding:0;}
-    @page{size:A4; margin:14mm 13mm;}
-  }
+@media print{
+body{background:#fff;}
+#inputView, .printbar, .printbar-hint{display:none !important;}
+#printView{display:block !important; padding:0; max-width:none;}
+.sheet{border:0; padding:0;}
+@page{size:A4; margin:14mm 13mm;}
+}
 </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
 <body>
 
 <!-- ==================== 1. 입력 화면 ==================== -->
+
 <div id="inputView">
   <header class="appbar">
     <div class="org">아동청소년정신건강지원시설 청소년심터</div>
@@ -198,127 +206,136 @@
   <fieldset>
     <legend>후원자 정보</legend>
 
-    <div class="field">
-      <label class="t req">후원자 구분</label>
-      <div class="choices" id="grpType">
-        <label><input type="radio" name="ptype" value="개인" checked>개인</label>
-        <label><input type="radio" name="ptype" value="단체">단체</label>
-        <label><input type="radio" name="ptype" value="기타">기타</label>
-      </div>
-      <div class="subfield" id="typeEtcWrap">
-        <input type="text" id="typeEtc" placeholder="기타 내용을 적어주세요">
-      </div>
-    </div>
+```
+<div class="field">
+  <label class="t req">후원자 구분</label>
+  <div class="choices" id="grpType">
+    <label><input type="radio" name="ptype" value="개인" checked>개인</label>
+    <label><input type="radio" name="ptype" value="단체">단체</label>
+    <label><input type="radio" name="ptype" value="기타">기타</label>
+  </div>
+  <div class="subfield" id="typeEtcWrap">
+    <input type="text" id="typeEtc" placeholder="기타 내용을 적어주세요">
+  </div>
+</div>
 
-    <div class="field">
-      <label class="t req" for="name">성명(단체명)</label>
-      <input type="text" id="name" placeholder="홍길동">
-    </div>
+<div class="field">
+  <label class="t req" for="name">성명(단체명)</label>
+  <input type="text" id="name" placeholder="홍길동">
+</div>
 
-    <div class="field">
-      <label class="t" for="rrn">주민등록번호(사업자등록번호)</label>
-      <input type="tel" id="rrn" placeholder="000000-0000000" inputmode="numeric" maxlength="14">
-      <p class="hint warn">※ 미기재 시 기부금영수증 발급 및 국세청 연말정산 자료 제공이 불가합니다.</p>
-      <p class="hint">입력하신 번호는 저장·전송되지 않고 인쇄용 서식에만 표시됩니다.</p>
-    </div>
+<div class="field">
+  <label class="t" for="rrn">주민등록번호(사업자등록번호)</label>
+  <input type="tel" id="rrn" placeholder="000000-0000000" inputmode="numeric" maxlength="14">
+  <p class="hint warn">※ 미기재 시 기부금영수증 발급 및 국세청 연말정산 자료 제공이 불가합니다.</p>
+  <p class="hint">입력하신 번호는 저장·전송되지 않고 인쇄용 서식에만 표시됩니다.</p>
+</div>
 
-    <div class="subfield" id="orgFields">
-      <div class="field">
-        <label class="t" for="ceo">대표자(법인)</label>
-        <input type="text" id="ceo">
-      </div>
-      <div class="field">
-        <label class="t" for="dept">부서/담당자</label>
-        <input type="text" id="dept">
-      </div>
-    </div>
+<div class="subfield" id="orgFields">
+  <div class="field">
+    <label class="t" for="ceo">대표자(법인)</label>
+    <input type="text" id="ceo">
+  </div>
+  <div class="field">
+    <label class="t" for="dept">부서/담당자</label>
+    <input type="text" id="dept">
+  </div>
+</div>
 
-    <div class="field">
-      <label class="t req" for="phone">연락처</label>
-      <input type="tel" id="phone" placeholder="010-0000-0000">
-    </div>
-    <div class="field">
-      <label class="t" for="email">이메일</label>
-      <input type="email" id="email" placeholder="example@email.com">
-    </div>
-    <div class="field">
-      <label class="t req" for="addr">주소</label>
-      <input type="text" id="addr" placeholder="기부금영수증 발송 주소">
-    </div>
+<div class="field">
+  <label class="t req" for="phone">연락처</label>
+  <input type="tel" id="phone" placeholder="010-0000-0000">
+</div>
+<div class="field">
+  <label class="t" for="email">이메일</label>
+  <input type="email" id="email" placeholder="example@email.com">
+</div>
+<div class="field">
+  <label class="t req" for="addr">주소</label>
+  <input type="text" id="addr" placeholder="기부금영수증 발송 주소">
+</div>
+```
+
   </fieldset>
 
   <fieldset>
     <legend>후원 내용</legend>
 
-    <div class="field">
-      <label class="t req">세부내용</label>
-      <div class="choices">
-        <label><input type="radio" name="dtype" value="일반후원" checked>일반후원</label>
-        <label><input type="radio" name="dtype" value="지정후원">지정후원</label>
-      </div>
-      <div class="subfield" id="desigWrap">
-        <input type="text" id="desigTxt" placeholder="지정 내용 (예: 청소년 상담 프로그램)">
-      </div>
-    </div>
+```
+<div class="field">
+  <label class="t req">세부내용</label>
+  <div class="choices">
+    <label><input type="radio" name="dtype" value="일반후원" checked>일반후원</label>
+    <label><input type="radio" name="dtype" value="지정후원">지정후원</label>
+  </div>
+  <div class="subfield" id="desigWrap">
+    <input type="text" id="desigTxt" placeholder="지정 내용 (예: 청소년 상담 프로그램)">
+  </div>
+</div>
 
-    <div class="field">
-      <label class="t req">후원방법</label>
-      <div class="choices">
-        <label><input type="radio" name="method" value="일시" checked>일시</label>
-        <label><input type="radio" name="method" value="정기">정기</label>
-      </div>
-      <p class="hint">정기후원은 은행 자동이체서비스를 이용하시면 간편하고 안정적으로 참여하실 수 있습니다.</p>
-    </div>
+<div class="field">
+  <label class="t req">후원방법</label>
+  <div class="choices">
+    <label><input type="radio" name="method" value="일시" checked>일시</label>
+    <label><input type="radio" name="method" value="정기">정기</label>
+  </div>
+  <p class="hint">정기후원은 은행 자동이체서비스를 이용하시면 간편하고 안정적으로 참여하실 수 있습니다.</p>
+</div>
 
-    <div class="field">
-      <label class="t req" for="amount">기부금액</label>
-      <input type="text" id="amount" placeholder="예: 월 10,000원 / 일시 50,000원" inputmode="numeric">
-    </div>
-    <div class="field">
-      <label class="t req" for="payer">입금자명</label>
-      <input type="text" id="payer" placeholder="입금 시 표시될 이름">
-    </div>
-    <div class="field">
-      <label class="t" for="payDate">입금(예정)일</label>
-      <input type="date" id="payDate">
-      <p class="hint">오늘 날짜가 자동 입력됩니다. 다른 날짜로 변경할 수 있어요.</p>
-    </div>
+<div class="field">
+  <label class="t req" for="amount">기부금액</label>
+  <input type="text" id="amount" placeholder="예: 월 10,000원 / 일시 50,000원" inputmode="numeric">
+</div>
+<div class="field">
+  <label class="t req" for="payer">입금자명</label>
+  <input type="text" id="payer" placeholder="입금 시 표시될 이름">
+</div>
+<div class="field">
+  <label class="t" for="payDate">입금(예정)일</label>
+  <input type="date" id="payDate">
+  <p class="hint">오늘 날짜가 자동 입력됩니다. 다른 날짜로 변경할 수 있어요.</p>
+</div>
+```
+
   </fieldset>
 
   <fieldset>
     <legend>개인정보 수집·이용 및 제3자 제공 동의</legend>
 
-    <div class="consent-text">
-      아동청소년정신건강지원시설 청소년심터는 「개인정보 보호법」 제15조 및 제22조에 의거하여 개인정보 수집 및 이용에 관한 정보주체의 동의절차를 준수하며, 고지 후 수집된 정보는 수집·이용 목적 외의 용도로는 절대 이용·제공되지 않습니다.
-      <table>
-        <tr><th>항목</th><th>수집·이용 목적</th><th>보유기간</th></tr>
-        <tr><td>(필수) 성명, 생년월일,<br>연락처, 주소, e-mail</td><td>기부신청, 기부내역확인,<br>확인서발급, 기부자서비스 등</td><td>10년간 보존 후 파기<br>(관계법령에 의거)</td></tr>
-      </table>
-      ☞ 위 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다. 단, 거부할 경우 기부신청이 거부될 수 있습니다.
-    </div>
-    <div class="field">
-      <label class="t req">개인정보 수집·이용 동의</label>
-      <div class="choices">
-        <label><input type="radio" name="c1" value="동의함">동의함</label>
-        <label><input type="radio" name="c1" value="동의하지 않음">동의하지 않음</label>
-      </div>
-    </div>
+```
+<div class="consent-text">
+  아동청소년정신건강지원시설 청소년심터는 「개인정보 보호법」 제15조 및 제22조에 의거하여 개인정보 수집 및 이용에 관한 정보주체의 동의절차를 준수하며, 고지 후 수집된 정보는 수집·이용 목적 외의 용도로는 절대 이용·제공되지 않습니다.
+  <table>
+    <tr><th>항목</th><th>수집·이용 목적</th><th>보유기간</th></tr>
+    <tr><td>(필수) 성명, 생년월일,<br>연락처, 주소, e-mail</td><td>기부신청, 기부내역확인,<br>확인서발급, 기부자서비스 등</td><td>10년간 보존 후 파기<br>(관계법령에 의거)</td></tr>
+  </table>
+  ☞ 위 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다. 단, 거부할 경우 기부신청이 거부될 수 있습니다.
+</div>
+<div class="field">
+  <label class="t req">개인정보 수집·이용 동의</label>
+  <div class="choices">
+    <label><input type="radio" name="c1" value="동의함">동의함</label>
+    <label><input type="radio" name="c1" value="동의하지 않음">동의하지 않음</label>
+  </div>
+</div>
 
-    <div class="consent-text">
-      &lt;기타고지사항&gt; 개인정보보호법 제24조의2, 소득세법, 상속세 및 증여세법에 따라 주민등록번호의 처리가 가능합니다.
-      <table>
-        <tr><th>항목</th><th>수집·이용 목적</th><th>보유기간</th><th>수집근거</th></tr>
-        <tr><td>주민등록번호</td><td>기부영수증 발급</td><td>10년</td><td>소득세법 제160조의3 및 시행령 제208조의3,<br>상속세 및 증여세법 제51조</td></tr>
-      </table>
-      ☞ 위 고유식별번호(주민등록번호) 제3자 제공·이용에 대한 동의를 거부할 권리가 있습니다. 그러나 동의를 거부할 경우 기부신청이 거부될 수 있습니다.
-    </div>
-    <div class="field">
-      <label class="t req">고유식별정보(주민등록번호) 처리 동의</label>
-      <div class="choices">
-        <label><input type="radio" name="c2" value="동의함">동의함</label>
-        <label><input type="radio" name="c2" value="동의하지 않음">동의하지 않음</label>
-      </div>
-    </div>
+<div class="consent-text">
+  &lt;기타고지사항&gt; 개인정보보호법 제24조의2, 소득세법, 상속세 및 증여세법에 따라 주민등록번호의 처리가 가능합니다.
+  <table>
+    <tr><th>항목</th><th>수집·이용 목적</th><th>보유기간</th><th>수집근거</th></tr>
+    <tr><td>주민등록번호</td><td>기부영수증 발급</td><td>10년</td><td>소득세법 제160조의3 및 시행령 제208조의3,<br>상속세 및 증여세법 제51조</td></tr>
+  </table>
+  ☞ 위 고유식별번호(주민등록번호) 제3자 제공·이용에 대한 동의를 거부할 권리가 있습니다. 그러나 동의를 거부할 경우 기부신청이 거부될 수 있습니다.
+</div>
+<div class="field">
+  <label class="t req">고유식별정보(주민등록번호) 처리 동의</label>
+  <div class="choices">
+    <label><input type="radio" name="c2" value="동의함">동의함</label>
+    <label><input type="radio" name="c2" value="동의하지 않음">동의하지 않음</label>
+  </div>
+</div>
+```
+
   </fieldset>
 
   <fieldset>
@@ -333,109 +350,148 @@
     </div>
   </fieldset>
 
-  <button type="button" class="btn-primary" id="makeSheet">신청 완료</button>
+<button type="button" class="btn-primary" id="makeSheet">신청 완료</button>
+
   <p id="errMsg"></p>
 </div>
 
 <!-- ==================== 2. 인쇄 서식 화면 ==================== -->
+
 <div id="printView">
   <div class="printbar">
     <button type="button" class="go-back" id="backBtn">← 수정하기</button>
     <button type="button" class="go-print" onclick="window.print()">인쇄 / PDF 저장</button>
   </div>
   <p class="printbar-hint">휴대폰에서는 [인쇄 / PDF 저장] → 'PDF로 저장'을 선택해 파일로 보관하거나 이메일로 보낼 수 있습니다.</p>
+  <p id="sendStatus" style="text-align:center; font-size:14px; font-weight:700; margin:-6px 0 14px; display:none;"></p>
 
   <div class="sheet">
     <div class="doc-title">정기 / 일시 후원신청서</div>
     <div class="doc-sub">아동청소년정신건강지원시설 청소년심터</div>
 
-    <table class="form">
-      <tr>
-        <th>후원자 구분</th>
-        <td colspan="3" id="p_type"></td>
-      </tr>
-      <tr>
-        <th>성명(단체명)</th>
-        <td id="p_name"></td>
-        <th style="width:23%;">주민등록번호<br>(사업자등록번호)</th>
-        <td id="p_rrn"></td>
-      </tr>
-      <tr>
-        <th>대표자(법인)</th>
-        <td id="p_ceo"></td>
-        <th>부서/담당자</th>
-        <td id="p_dept"></td>
-      </tr>
-      <tr>
-        <th>연락처</th>
-        <td id="p_phone"></td>
-        <th>이메일</th>
-        <td id="p_email"></td>
-      </tr>
-      <tr>
-        <th>주소</th>
-        <td colspan="3" id="p_addr"></td>
-      </tr>
-      <tr>
-        <th>세부내용</th>
-        <td colspan="3" id="p_detail"></td>
-      </tr>
-      <tr>
-        <th>후원방법</th>
-        <td id="p_method"></td>
-        <th>기부금액</th>
-        <td id="p_amount"></td>
-      </tr>
-      <tr>
-        <th>입금계좌</th>
-        <td>아이엠뱅크(구.대구은행) 504-10-659066-9<br>(예금주: 아동청소년정신건강지원시설 청소년심터)</td>
-        <th>입금자명 /<br>입금(예정)일</th>
-        <td id="p_pay"></td>
-      </tr>
-    </table>
+```
+<table class="form">
+  <tr>
+    <th>후원자 구분</th>
+    <td colspan="3" id="p_type"></td>
+  </tr>
+  <tr>
+    <th>성명(단체명)</th>
+    <td id="p_name"></td>
+    <th style="width:23%;">주민등록번호<br>(사업자등록번호)</th>
+    <td id="p_rrn"></td>
+  </tr>
+  <tr>
+    <th>대표자(법인)</th>
+    <td id="p_ceo"></td>
+    <th>부서/담당자</th>
+    <td id="p_dept"></td>
+  </tr>
+  <tr>
+    <th>연락처</th>
+    <td id="p_phone"></td>
+    <th>이메일</th>
+    <td id="p_email"></td>
+  </tr>
+  <tr>
+    <th>주소</th>
+    <td colspan="3" id="p_addr"></td>
+  </tr>
+  <tr>
+    <th>세부내용</th>
+    <td colspan="3" id="p_detail"></td>
+  </tr>
+  <tr>
+    <th>후원방법</th>
+    <td id="p_method"></td>
+    <th>기부금액</th>
+    <td id="p_amount"></td>
+  </tr>
+  <tr>
+    <th>입금계좌</th>
+    <td>아이엠뱅크(구.대구은행) 504-10-659066-9<br>(예금주: 아동청소년정신건강지원시설 청소년심터)</td>
+    <th>입금자명 /<br>입금(예정)일</th>
+    <td id="p_pay"></td>
+  </tr>
+</table>
 
-    <p class="fine">
-      ※ 주민(사업자)등록번호 미기재 시 기부금영수증 발급 및 소득공제를 위한 국세청 연말정산 서비스 자료 제공이 불가합니다.<br>
-      * 후원문의: 전화 053-476-9242 / 이메일 mindpc@withgyet.com<br>
-      * 정기후원 신청 시, 은행 자동이체서비스를 이용하시면 간편하고 안정적으로 참여하실 수 있습니다.
-    </p>
+<p class="fine">
+  ※ 주민(사업자)등록번호 미기재 시 기부금영수증 발급 및 소득공제를 위한 국세청 연말정산 서비스 자료 제공이 불가합니다.<br>
+  * 후원문의: 전화 053-476-9242 / 이메일 mindpc@withgyet.com<br>
+  * 정기후원 신청 시, 은행 자동이체서비스를 이용하시면 간편하고 안정적으로 참여하실 수 있습니다.
+</p>
 
-    <div class="sec-title">【개인정보 수집·이용 및 제3자 제공 동의서】</div>
-    <p class="consent-block">
-      아동청소년정신건강지원시설 청소년심터는 「개인정보 보호법」 제15조 및 제22조에 의거하여 개인정보 수집 및 이용에 관한 정보주체의 동의절차를 준수하며, 고지 후 수집된 정보는 개인정보 수집 및 이용목적 외의 용도로는 절대 이용·제공되지 않습니다.
-    </p>
-    <p class="consent-block"><b>1. 개인정보 수집·이용</b></p>
-    <table class="mini">
-      <tr><th>항목</th><th>수집·이용 목적</th><th>보유기간</th></tr>
-      <tr><td>(필수) 성명, 생년월일, 연락처, 주소, e-mail</td><td>기부신청, 기부내역확인, 확인서발급, 기부자서비스 등</td><td>10년간 보존 후 파기 (관계법령에 의거)</td></tr>
-    </table>
-    <p class="consent-block">☞ 위의 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다. 단, 거부할 경우 기부신청이 거부될 수 있습니다.</p>
-    <p class="agree-line" id="p_c1"></p>
+<div class="sec-title">【개인정보 수집·이용 및 제3자 제공 동의서】</div>
+<p class="consent-block">
+  아동청소년정신건강지원시설 청소년심터는 「개인정보 보호법」 제15조 및 제22조에 의거하여 개인정보 수집 및 이용에 관한 정보주체의 동의절차를 준수하며, 고지 후 수집된 정보는 개인정보 수집 및 이용목적 외의 용도로는 절대 이용·제공되지 않습니다.
+</p>
+<p class="consent-block"><b>1. 개인정보 수집·이용</b></p>
+<table class="mini">
+  <tr><th>항목</th><th>수집·이용 목적</th><th>보유기간</th></tr>
+  <tr><td>(필수) 성명, 생년월일, 연락처, 주소, e-mail</td><td>기부신청, 기부내역확인, 확인서발급, 기부자서비스 등</td><td>10년간 보존 후 파기 (관계법령에 의거)</td></tr>
+</table>
+<p class="consent-block">☞ 위의 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다. 단, 거부할 경우 기부신청이 거부될 수 있습니다.</p>
+<p class="agree-line" id="p_c1"></p>
 
-    <p class="consent-block">&lt;기타고지사항&gt; 개인정보보호법 제24조의2, 소득세법, 상속세 및 증여세법에 따라 주민등록번호의 처리가 가능합니다.</p>
-    <table class="mini">
-      <tr><th>항목</th><th>수집·이용 목적</th><th>보유기간</th><th>수집근거</th></tr>
-      <tr><td>주민등록번호</td><td>기부영수증 발급</td><td>10년</td><td>소득세법 제160조의3 및 시행령 제208조의3, 상속세 및 증여세법 제51조</td></tr>
-    </table>
-    <p class="consent-block">☞ 위의 고유식별번호(주민등록번호) 제3자 제공·이용에 대한 동의를 거부할 권리가 있습니다. 그러나 동의를 거부할 경우 기부신청이 거부될 수 있습니다.</p>
-    <p class="agree-line" id="p_c2"></p>
+<p class="consent-block">&lt;기타고지사항&gt; 개인정보보호법 제24조의2, 소득세법, 상속세 및 증여세법에 따라 주민등록번호의 처리가 가능합니다.</p>
+<table class="mini">
+  <tr><th>항목</th><th>수집·이용 목적</th><th>보유기간</th><th>수집근거</th></tr>
+  <tr><td>주민등록번호</td><td>기부영수증 발급</td><td>10년</td><td>소득세법 제160조의3 및 시행령 제208조의3, 상속세 및 증여세법 제51조</td></tr>
+</table>
+<p class="consent-block">☞ 위의 고유식별번호(주민등록번호) 제3자 제공·이용에 대한 동의를 거부할 권리가 있습니다. 그러나 동의를 거부할 경우 기부신청이 거부될 수 있습니다.</p>
+<p class="agree-line" id="p_c2"></p>
 
-    <div class="sign-area">
-      <p>본인은 본 동의서의 내용과 개인정보 수집·이용 및 제공에 대하여 이해하고 서명합니다.</p>
-      <p class="sign-date" id="p_date" style="margin-top:16px;"></p>
-      <div class="sign-row">
-        <span class="who">신청인&nbsp;&nbsp;<span id="p_signName"></span></span>
-        <div class="sig-img-box"><img id="p_sigImg" alt="서명"></div>
-        <span>(서명 또는 인)</span>
-      </div>
-      <p class="to-line">아동청소년정신건강지원시설 청소년심터 시설장 귀하</p>
-    </div>
+<div class="sign-area">
+  <p>본인은 본 동의서의 내용과 개인정보 수집·이용 및 제공에 대하여 이해하고 서명합니다.</p>
+  <p class="sign-date" id="p_date" style="margin-top:16px;"></p>
+  <div class="sign-row">
+    <span class="who">신청인&nbsp;&nbsp;<span id="p_signName"></span></span>
+    <span class="seal-spot">(서명 또는 인)<img id="p_sigImg" alt=""></span>
+  </div>
+  <p class="to-line">아동청소년정신건강지원시설 청소년심터 시설장 귀하</p>
+</div>
+```
+
   </div>
 </div>
 
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
+
+  /* ==========================================================
+     [설정] 이메일 자동 전송 주소
+     구글 앱스 스크립트를 배포한 뒤 받은 웹앱 주소(https://script.google.com/... 로 시작)를
+     아래 따옴표 안에 붙여넣으세요. 비워두면 전송 기능 없이 인쇄만 됩니다.
+  ========================================================== */
+  var SEND_URL = "https://script.google.com/a/macros/withgyet.com/s/AKfycbyrJNPwBZxdsdZ5OjyfeKbbfjYl7kFg9yadHc7sYYUxHpQupeIrtL3yY5Zavg--nQ_c/exec";
+
+  /* ----- 서명 여백 자르기 (실제 서명 부분만 잘라냄) ----- */
+  function trimSignature(srcCanvas){
+    var c = srcCanvas, w = c.width, h = c.height;
+    var cx = c.getContext('2d');
+    var data;
+    try{ data = cx.getImageData(0,0,w,h).data; }catch(e){ return c.toDataURL('image/png'); }
+    var minX=w, minY=h, maxX=0, maxY=0, found=false;
+    for(var y=0; y<h; y++){
+      for(var x=0; x<w; x++){
+        if(data[(y*w+x)*4+3] > 10){
+          found = true;
+          if(x<minX)minX=x; if(x>maxX)maxX=x;
+          if(y<minY)minY=y; if(y>maxY)maxY=y;
+        }
+      }
+    }
+    if(!found) return c.toDataURL('image/png');
+    var pad = 6;
+    minX=Math.max(0,minX-pad); minY=Math.max(0,minY-pad);
+    maxX=Math.min(w-1,maxX+pad); maxY=Math.min(h-1,maxY+pad);
+    var tw=maxX-minX+1, th=maxY-minY+1;
+    var out = document.createElement('canvas');
+    out.width=tw; out.height=th;
+    out.getContext('2d').drawImage(c, minX, minY, tw, th, 0, 0, tw, th);
+    return out.toDataURL('image/png');
+  }
 
   /* ----- 입금(예정)일: 오늘 날짜 자동 입력 ----- */
   (function(){
@@ -484,6 +540,28 @@
   $('phone').addEventListener('blur', function(){
     if(this.value === '010-' || this.value === '010') this.value = '';
   });
+
+  /* ----- 하이픈 지우기 처리: 하이픈 위에서 지우면 앞 숫자와 함께 삭제 ----- */
+  function attachSmartBackspace(el, formatFn){
+    function handle(e){
+      var pos = el.selectionStart;
+      if(pos !== el.selectionEnd || pos <= 0) return;
+      if(el.value.charAt(pos - 1) !== '-') return;
+      e.preventDefault();
+      el.value = el.value.slice(0, pos - 2) + el.value.slice(pos);
+      formatFn(el);
+      var np = Math.max(0, pos - 2);
+      try{ el.setSelectionRange(np, np); }catch(err){}
+    }
+    el.addEventListener('keydown', function(e){
+      if(e.key === 'Backspace') handle(e);
+    });
+    el.addEventListener('beforeinput', function(e){
+      if(e.inputType === 'deleteContentBackward') handle(e);
+    });
+  }
+  attachSmartBackspace($('rrn'), formatRRN);
+  attachSmartBackspace($('phone'), formatPhone);
 
   /* ----- 기부금액: 숫자 입력 시 자동으로 '원' 붙이기 ----- */
   $('amount').addEventListener('blur', function(){
@@ -624,12 +702,68 @@
     var now = new Date();
     $('p_date').textContent = now.getFullYear()+'년   '+(now.getMonth()+1)+'월   '+now.getDate()+'일';
     $('p_signName').textContent = $('name').value.trim();
-    $('p_sigImg').src = canvas.toDataURL('image/png');
+    $('p_sigImg').src = trimSignature(canvas);
 
     $('inputView').style.display = 'none';
     $('printView').style.display = 'block';
     window.scrollTo(0,0);
+
+    sendPdfByEmail();
   });
+
+  /* ----- PDF 생성 후 이메일 자동 전송 ----- */
+  function sendPdfByEmail(){
+    var st = $('sendStatus');
+    if(!SEND_URL){ st.style.display='none'; return; }
+    st.style.display = 'block';
+    st.style.color = '#0a5c5b';
+    st.textContent = '신청서를 전송하고 있습니다...';
+
+    var sheet = document.querySelector('.sheet');
+    setTimeout(function(){
+      html2canvas(sheet, {scale:2, useCORS:true, backgroundColor:'#ffffff'}).then(function(cv){
+        var jsPDF = window.jspdf.jsPDF;
+        var pdf = new jsPDF('p','mm','a4');
+        var pw = 210, ph = 297, margin = 10;
+        var iw = pw - margin*2;
+        var ih = cv.height * iw / cv.width;
+        var img = cv.toDataURL('image/jpeg', 0.92);
+        if(ih <= ph - margin*2){
+          pdf.addImage(img, 'JPEG', margin, margin, iw, ih);
+        } else {
+          var remaining = ih, pos = 0;
+          while(remaining > 0){
+            pdf.addImage(img, 'JPEG', margin, margin - pos, iw, ih);
+            remaining -= (ph - margin*2);
+            pos += (ph - margin*2);
+            if(remaining > 0) pdf.addPage();
+          }
+        }
+        var b64 = pdf.output('datauristring').split(',')[1];
+        var fname = '후원신청서_' + $('name').value.trim() + '_' +
+          new Date().toISOString().slice(0,10) + '.pdf';
+
+        return fetch(SEND_URL, {
+          method:'POST',
+          mode:'no-cors',
+          headers:{'Content-Type':'text/plain'},
+          body: JSON.stringify({
+            name: $('name').value.trim(),
+            phone: $('phone').value.trim(),
+            amount: $('amount').value.trim(),
+            method: (document.querySelector('input[name=method]:checked')||{}).value || '',
+            filename: fname,
+            pdf: b64
+          })
+        });
+      }).then(function(){
+        st.textContent = '✓ 신청서가 접수되었습니다. 감사합니다!';
+      }).catch(function(){
+        st.style.color = '#c0392b';
+        st.textContent = '자동 전송에 실패했습니다. 아래 [인쇄 / PDF 저장]으로 저장 후 mindpc@withgyet.com 으로 보내주세요.';
+      });
+    }, 300);
+  }
 
   $('backBtn').addEventListener('click', function(){
     $('printView').style.display = 'none';
@@ -638,5 +772,6 @@
   });
 })();
 </script>
+
 </body>
 </html>
