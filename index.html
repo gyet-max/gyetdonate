@@ -344,9 +344,9 @@
 <div id="printView">
   <div class="printbar">
     <button type="button" class="go-back" id="backBtn">← 수정하기</button>
-    <button type="button" class="go-print" onclick="window.print()">인쇄 / PDF 저장</button>
+    <button type="button" class="go-print" id="pdfBtn">PDF 파일로 저장</button>
   </div>
-  <p class="printbar-hint">휴대폰에서는 [인쇄 / PDF 저장] → 'PDF로 저장'을 선택해 파일로 보관하거나 이메일로 보낼 수 있습니다.</p>
+  <p class="printbar-hint">신청서는 담당자에게 자동으로 전송됩니다. [PDF 파일로 저장]은 개인 보관용입니다.</p>
   <p id="sendStatus" style="text-align:center; font-size:14px; font-weight:700; margin:-6px 0 14px; display:none;"></p>
 
   <div class="sheet">
@@ -692,38 +692,44 @@
     sendPdfByEmail();
   });
 
-  /* ----- PDF 생성 후 이메일 자동 전송 ----- */
+  /* ----- PDF 생성 (전송·저장 공용) ----- */
+  function buildPdf(){
+    var sheet = document.querySelector('.sheet');
+    return html2canvas(sheet, {scale:2, useCORS:true, backgroundColor:'#ffffff'}).then(function(cv){
+      var jsPDF = window.jspdf.jsPDF;
+      var pdf = new jsPDF('p','mm','a4');
+      var pw = 210, ph = 297, margin = 10;
+      var iw = pw - margin*2;
+      var ih = cv.height * iw / cv.width;
+      var img = cv.toDataURL('image/jpeg', 0.92);
+      if(ih <= ph - margin*2){
+        pdf.addImage(img, 'JPEG', margin, margin, iw, ih);
+      } else {
+        var remaining = ih, pos = 0;
+        while(remaining > 0){
+          pdf.addImage(img, 'JPEG', margin, margin - pos, iw, ih);
+          remaining -= (ph - margin*2);
+          pos += (ph - margin*2);
+          if(remaining > 0) pdf.addPage();
+        }
+      }
+      var fname = '후원신청서_' + $('name').value.trim() + '_' +
+        new Date().toISOString().slice(0,10) + '.pdf';
+      return {pdf: pdf, fname: fname};
+    });
+  }
+
+  /* ----- 이메일 자동 전송 ----- */
   function sendPdfByEmail(){
     var st = $('sendStatus');
     if(!SEND_URL){ st.style.display='none'; return; }
     st.style.display = 'block';
     st.style.color = '#0a5c5b';
-    st.textContent = '신청서를 전송하고 있습니다...';
+    st.textContent = '신청서를 전송하고 있습니다. 잠시만 기다려주세요...';
 
-    var sheet = document.querySelector('.sheet');
     setTimeout(function(){
-      html2canvas(sheet, {scale:2, useCORS:true, backgroundColor:'#ffffff'}).then(function(cv){
-        var jsPDF = window.jspdf.jsPDF;
-        var pdf = new jsPDF('p','mm','a4');
-        var pw = 210, ph = 297, margin = 10;
-        var iw = pw - margin*2;
-        var ih = cv.height * iw / cv.width;
-        var img = cv.toDataURL('image/jpeg', 0.92);
-        if(ih <= ph - margin*2){
-          pdf.addImage(img, 'JPEG', margin, margin, iw, ih);
-        } else {
-          var remaining = ih, pos = 0;
-          while(remaining > 0){
-            pdf.addImage(img, 'JPEG', margin, margin - pos, iw, ih);
-            remaining -= (ph - margin*2);
-            pos += (ph - margin*2);
-            if(remaining > 0) pdf.addPage();
-          }
-        }
-        var b64 = pdf.output('datauristring').split(',')[1];
-        var fname = '후원신청서_' + $('name').value.trim() + '_' +
-          new Date().toISOString().slice(0,10) + '.pdf';
-
+      buildPdf().then(function(r){
+        var b64 = r.pdf.output('datauristring').split(',')[1];
         return fetch(SEND_URL, {
           method:'POST',
           mode:'no-cors',
@@ -733,18 +739,33 @@
             phone: $('phone').value.trim(),
             amount: $('amount').value.trim(),
             method: (document.querySelector('input[name=method]:checked')||{}).value || '',
-            filename: fname,
+            filename: r.fname,
             pdf: b64
           })
         });
       }).then(function(){
-        st.textContent = '✓ 신청서가 접수되었습니다. 감사합니다!';
+        st.textContent = '✓ 신청서가 접수되었습니다. 후원해 주셔서 감사합니다!';
       }).catch(function(){
         st.style.color = '#c0392b';
-        st.textContent = '자동 전송에 실패했습니다. 아래 [인쇄 / PDF 저장]으로 저장 후 mindpc@withgyet.com 으로 보내주세요.';
+        st.textContent = '자동 전송에 실패했습니다. [PDF 파일로 저장] 후 mindpc@withgyet.com 으로 보내주세요.';
       });
     }, 300);
   }
+
+  /* ----- PDF 내려받기 (개인 보관용) ----- */
+  $('pdfBtn').addEventListener('click', function(){
+    var btn = this;
+    btn.disabled = true;
+    btn.textContent = 'PDF 만드는 중...';
+    buildPdf().then(function(r){
+      r.pdf.save(r.fname);
+    }).catch(function(){
+      alert('PDF 생성에 실패했습니다. 화면을 캡처해서 보관해주세요.');
+    }).finally(function(){
+      btn.disabled = false;
+      btn.textContent = 'PDF 파일로 저장';
+    });
+  });
 
   $('backBtn').addEventListener('click', function(){
     $('printView').style.display = 'none';
