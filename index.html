@@ -365,6 +365,16 @@
   <p class="printbar-hint">신청서는 담당자에게 자동으로 전송됩니다. [PDF 파일로 저장]은 개인 보관용입니다.</p>
   <p id="sendStatus" style="text-align:center; font-size:14px; font-weight:700; margin:-6px 0 14px; display:none;"></p>
 
+  <div style="background:#e6f2f2; border:1.5px solid #0e7c7b; border-radius:12px; padding:16px 15px; margin-bottom:18px; text-align:center;">
+    <div style="font-size:13px; font-weight:800; color:#0a5c5b; margin-bottom:6px;">후원금 입금계좌</div>
+    <div style="font-size:16.5px; font-weight:800; color:#1c2b33;">아이엠뱅크(구.대구은행) 504-10-659066-9</div>
+    <div style="font-size:12.5px; color:#33474e; margin-top:4px;">(예금주: 아동청소년정신건강지원시설 청소년심터)</div>
+    <button type="button" id="copyAcctBtn"
+      style="margin-top:10px; padding:9px 18px; font-size:13.5px; font-weight:700; color:#fff; background:#0e7c7b; border:0; border-radius:8px; cursor:pointer;">
+      계좌번호 복사
+    </button>
+  </div>
+
   <div class="sheet">
     <div class="doc-title">정기 / 일시 후원신청서</div>
     <div class="doc-sub">아동청소년정신건강지원시설 청소년심터</div>
@@ -821,6 +831,27 @@
       alert('저장에 실패했습니다. 화면을 캡처해서 보관해주세요.');
     }
   }
+
+  /* ----- 계좌번호 복사 ----- */
+  $('copyAcctBtn').addEventListener('click', function(){
+    var btn = this;
+    var acct = '504-10-659066-9';
+    function done(){
+      btn.textContent = '✓ 복사되었습니다';
+      setTimeout(function(){ btn.textContent = '계좌번호 복사'; }, 2000);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(acct).then(done).catch(function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = acct;
+      document.body.appendChild(ta);
+      ta.select();
+      try{ document.execCommand('copy'); done(); }catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
 
   $('backBtn').addEventListener('click', function(){
     cachedPdf = null; /* 수정 후 다시 신청 완료하면 새 PDF가 만들어짐 */
