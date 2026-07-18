@@ -171,6 +171,22 @@
     input[type=date]{min-height:48px;}
   }
 
+  /* ----- PDF 생성 전용 (화면 밖에서 A4 비율로 렌더링) ----- */
+  #pdfStage{position:fixed; left:-9999px; top:0; width:760px; background:#fff;}
+  #pdfStage .sheet{border:0; padding:30px 28px; font-size:11pt;}
+  #pdfStage .doc-title{font-size:16pt;}
+  #pdfStage table.form th{width:23%; font-size:10pt; padding:6px 8px; white-space:nowrap;}
+  #pdfStage table.form td{font-size:10pt; padding:6px 8px;}
+  #pdfStage table.mini th, #pdfStage table.mini td{font-size:8.5pt; padding:4px 5px;}
+  #pdfStage .consent-block{font-size:9pt;}
+  #pdfStage .fine{font-size:8.5pt;}
+  #pdfStage .sec-title{font-size:11.5pt; margin:12px 0 6px;}
+  #pdfStage .agree-line{margin:4px 0 10px;}
+  #pdfStage .sign-area{margin-top:18px;}
+  #pdfStage .sign-row{gap:12px; flex-wrap:nowrap;}
+  #pdfStage .seal-spot img{height:40px; max-width:110px;}
+  #pdfStage .to-line{font-size:11.5pt; margin-top:20px;}
+
   @media print{
     body{background:#fff;}
     #inputView, .printbar, .printbar-hint{display:none !important;}
@@ -696,34 +712,43 @@
   var cachedPdf = null; /* {blob, b64, fname} 신청 완료 시 미리 생성해 둠 */
 
   function buildPdf(){
-    var sheet = document.querySelector('.sheet');
-    return html2canvas(sheet, {scale:2, useCORS:true, backgroundColor:'#ffffff'}).then(function(cv){
-      var jsPDF = window.jspdf.jsPDF;
-      var pdf = new jsPDF('p','mm','a4');
-      var pw = 210, ph = 297, margin = 10;
-      var iw = pw - margin*2;
-      var ih = cv.height * iw / cv.width;
-      var img = cv.toDataURL('image/jpeg', 0.92);
-      if(ih <= ph - margin*2){
-        pdf.addImage(img, 'JPEG', margin, margin, iw, ih);
-      } else {
-        var remaining = ih, pos = 0;
-        while(remaining > 0){
-          pdf.addImage(img, 'JPEG', margin, margin - pos, iw, ih);
-          remaining -= (ph - margin*2);
-          pos += (ph - margin*2);
-          if(remaining > 0) pdf.addPage();
+    /* 화면 크기와 상관없이 항상 문서(A4) 비율로 다시 그려서 찍는다 */
+    var stage = document.createElement('div');
+    stage.id = 'pdfStage';
+    var clone = document.querySelector('.sheet').cloneNode(true);
+    stage.appendChild(clone);
+    document.body.appendChild(stage);
+
+    return html2canvas(clone, {scale:2, useCORS:true, backgroundColor:'#ffffff', windowWidth:760})
+      .then(function(cv){
+        document.body.removeChild(stage);
+        var jsPDF = window.jspdf.jsPDF;
+        var pdf = new jsPDF('p','mm','a4');
+        var pw = 210, ph = 297, margin = 8;
+        var availW = pw - margin*2, availH = ph - margin*2;
+        var ih = cv.height * availW / cv.width;
+        var img = cv.toDataURL('image/jpeg', 0.92);
+        if(ih <= availH){
+          /* 세로 여유가 있으면 폭 기준으로 채움 */
+          pdf.addImage(img, 'JPEG', margin, margin, availW, ih);
+        } else {
+          /* 내용이 길면 1장에 들어가도록 축소해서 가운데 배치 */
+          var iw2 = availW * (availH / ih);
+          pdf.addImage(img, 'JPEG', (pw - iw2)/2, margin, iw2, availH);
         }
-      }
-      var fname = '후원신청서_' + $('name').value.trim() + '_' +
-        new Date().toISOString().slice(0,10) + '.pdf';
-      cachedPdf = {
-        blob: pdf.output('blob'),
-        b64: pdf.output('datauristring').split(',')[1],
-        fname: fname
-      };
-      return cachedPdf;
-    });
+        var fname = '후원신청서_' + $('name').value.trim() + '_' +
+          new Date().toISOString().slice(0,10) + '.pdf';
+        cachedPdf = {
+          blob: pdf.output('blob'),
+          b64: pdf.output('datauristring').split(',')[1],
+          fname: fname
+        };
+        return cachedPdf;
+      })
+      .catch(function(err){
+        if(stage.parentNode) document.body.removeChild(stage);
+        throw err;
+      });
   }
 
   /* ----- 이메일 자동 전송 ----- */
