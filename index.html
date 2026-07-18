@@ -693,6 +693,8 @@
   });
 
   /* ----- PDF 생성 (전송·저장 공용) ----- */
+  var cachedPdf = null; /* {blob, b64, fname} 신청 완료 시 미리 생성해 둠 */
+
   function buildPdf(){
     var sheet = document.querySelector('.sheet');
     return html2canvas(sheet, {scale:2, useCORS:true, backgroundColor:'#ffffff'}).then(function(cv){
@@ -715,21 +717,25 @@
       }
       var fname = '후원신청서_' + $('name').value.trim() + '_' +
         new Date().toISOString().slice(0,10) + '.pdf';
-      return {pdf: pdf, fname: fname};
+      cachedPdf = {
+        blob: pdf.output('blob'),
+        b64: pdf.output('datauristring').split(',')[1],
+        fname: fname
+      };
+      return cachedPdf;
     });
   }
 
   /* ----- 이메일 자동 전송 ----- */
   function sendPdfByEmail(){
     var st = $('sendStatus');
-    if(!SEND_URL){ st.style.display='none'; return; }
     st.style.display = 'block';
     st.style.color = '#0a5c5b';
     st.textContent = '신청서를 전송하고 있습니다. 잠시만 기다려주세요...';
 
     setTimeout(function(){
       buildPdf().then(function(r){
-        var b64 = r.pdf.output('datauristring').split(',')[1];
+        if(!SEND_URL) return;
         return fetch(SEND_URL, {
           method:'POST',
           mode:'no-cors',
@@ -740,11 +746,15 @@
             amount: $('amount').value.trim(),
             method: (document.querySelector('input[name=method]:checked')||{}).value || '',
             filename: r.fname,
-            pdf: b64
+            pdf: r.b64
           })
         });
       }).then(function(){
-        st.textContent = '✓ 신청서가 접수되었습니다. 후원해 주셔서 감사합니다!';
+        if(SEND_URL){
+          st.textContent = '✓ 신청서가 접수되었습니다. 후원해 주셔서 감사합니다!';
+        } else {
+          st.style.display = 'none';
+        }
       }).catch(function(){
         st.style.color = '#c0392b';
         st.textContent = '자동 전송에 실패했습니다. [PDF 파일로 저장] 후 mindpc@withgyet.com 으로 보내주세요.';
@@ -752,22 +762,43 @@
     }, 300);
   }
 
-  /* ----- PDF 내려받기 (개인 보관용) ----- */
+  /* ----- PDF 저장/공유 (개인 보관용) -----
+     아이폰 등에서는 버튼을 누른 '즉시' 공유창을 열어야 하므로
+     신청 완료 시 미리 만들어 둔 cachedPdf를 바로 사용한다. */
   $('pdfBtn').addEventListener('click', function(){
     var btn = this;
-    btn.disabled = true;
-    btn.textContent = 'PDF 만드는 중...';
-    buildPdf().then(function(r){
-      r.pdf.save(r.fname);
-    }).catch(function(){
-      alert('PDF 생성에 실패했습니다. 화면을 캡처해서 보관해주세요.');
-    }).finally(function(){
-      btn.disabled = false;
-      btn.textContent = 'PDF 파일로 저장';
-    });
+    if(!cachedPdf){
+      btn.textContent = 'PDF 준비 중... 잠시 후 다시 눌러주세요';
+      setTimeout(function(){ btn.textContent = 'PDF 파일로 저장'; }, 2000);
+      return;
+    }
+    savePdfNow(cachedPdf);
   });
 
+  function savePdfNow(r){
+    /* 1순위: 폰 공유창 (파일에 저장, 카톡, 메일 등 선택 가능) */
+    try{
+      var file = new File([r.blob], r.fname, {type:'application/pdf'});
+      if(navigator.canShare && navigator.canShare({files:[file]})){
+        navigator.share({files:[file], title:'후원신청서'}).catch(function(){});
+        return;
+      }
+    }catch(e){}
+    /* 2순위: 파일 내려받기 */
+    try{
+      var url = URL.createObjectURL(r.blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = r.fname;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 3000);
+    }catch(e){
+      alert('저장에 실패했습니다. 화면을 캡처해서 보관해주세요.');
+    }
+  }
+
   $('backBtn').addEventListener('click', function(){
+    cachedPdf = null; /* 수정 후 다시 신청 완료하면 새 PDF가 만들어짐 */
     $('printView').style.display = 'none';
     $('inputView').style.display = 'block';
     window.scrollTo(0,0);
